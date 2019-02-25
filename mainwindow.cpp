@@ -1,13 +1,19 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QMessageBox>
-#include <QString>
+#include "form.h"
+#include <QWebEngineView>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
+
 {
     ui->setupUi(this);
+   view = new QWebEngineView(this);
+        view->setMaximumSize(200,100);
+        view->setMinimumSize(1300,615);
+        view->load(QUrl("http://google.com" ));
+      view->show();
 }
 
 MainWindow::~MainWindow()
@@ -15,48 +21,53 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_SearchPushButton_clicked()
+
+void MainWindow::on_searchButton_clicked()
 {
-    QTextEdit *DocumentTextEdit = findChild<QTextEdit*>("DocumentTextEdit");
-    QLineEdit *SearchKeylineEdit = findChild<QLineEdit*>("SearchKeylineEdit");
+    view->load(QUrl(ui->urlEditButton->text()));
+}
+void MainWindow::on_urlEditButton_clicked()
+{
+    view->load(QUrl(ui->urlEditButton->text()));
 
-    QString searchString = SearchKeylineEdit->text();
+}
 
-    QTextDocument *document = DocumentTextEdit->document();
-    bool found = false;
-    document->undo();
 
-    if (searchString.isEmpty()) {
-            QMessageBox::information(this, tr("Empty Search Field"),
-                                     tr("The search field is empty. "
-                                        "Please enter a word and click Find."));
-        } else {
-            QTextCursor highlightCursor(document);
-            QTextCursor cursor(document);
 
-            cursor.beginEditBlock();
 
-            QTextCharFormat plainFormat(highlightCursor.charFormat());
-            QTextCharFormat colorFormat = plainFormat;
-            colorFormat.setForeground(Qt::red);
+void MainWindow::on_back_clicked()
+{
+    view->back();
+}
 
-            while (!highlightCursor.isNull() && !highlightCursor.atEnd()) {
-                highlightCursor = document->find(searchString, highlightCursor,
-                                                 QTextDocument::FindWholeWords);
+void MainWindow::on_forward_clicked()
+{
+    view->forward();
+}
 
-                if (!highlightCursor.isNull()) {
-                    found = true;
-                    highlightCursor.movePosition(QTextCursor::WordRight,
-                                                 QTextCursor::KeepAnchor);
-                    highlightCursor.mergeCharFormat(colorFormat);
-                }
-            }
+void MainWindow::on_reload_clicked()
+{
+    view->reload();
+}
 
-            cursor.endEditBlock();
-            if (found == false) {
-                QMessageBox::information(this, tr("Word Not Found"),
-                                         tr("Sorry, the word cannot be found."));
+void MainWindow::on_tabWidget_tabCloseRequested(int index)
+{
+    ui->tabWidget->removeTab(index);
+}
 
-            }
-    }
+void MainWindow::on_pushButton_clicked()
+{
+    ui->tabWidget->addTab(new Form(), QString("Tab %0"). arg (ui->tabWidget->count()+1));
+    ui->tabWidget->setCurrentIndex(ui->tabWidget->count()-1);
+
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+   /* nextTab nexttab;
+    nexttab.setModal(true);
+    nexttab.exec();
+*/
+    nexttab = new nextTab(this);
+    nexttab-> show();
 }

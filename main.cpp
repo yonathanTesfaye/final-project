@@ -1,16 +1,19 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include <iostream>
+#include <QWebEngineView>
+#include <QSplashScreen>
+#include <QTimer>
 int main(int argc, char *argv[])
 {
-    qputenv("QT_AUTO_SCREEN_SCALE_FACTOR","1");
-    qputenv("QT_SCREEN_SCALE_FACTORS","1");
-    qputenv("QT_SCALE_FACTOR","1");
-
     QApplication a(argc, argv);
+    QSplashScreen *splash=new QSplashScreen;
+    splash->setPixmap(QPixmap("/home/yonathan/webrowse.png"));
+    splash->show();
     MainWindow w;
 
-    w.show();
+    QTimer::singleShot(7500, splash, SLOT(close()));
+    QTimer::singleShot(7500, &w, SLOT(show()));
+   // w.show();
 
     return a.exec();
 }

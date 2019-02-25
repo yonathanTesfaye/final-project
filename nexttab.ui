@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>nextTab</class>
+ <widget class="QDialog" name="nextTab">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1759</width>
+    <height>721</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>New Tab</string>
+  </property>
+  <widget class="QPushButton" name="back">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>680</y>
+     <width>89</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="forward">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>680</y>
+     <width>89</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&gt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="reload">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>680</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Reload</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="urlEditButton">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>680</y>
+     <width>891</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="searchButton">
+   <property name="geometry">
+    <rect>
+     <x>1180</x>
+     <y>680</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Search</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
